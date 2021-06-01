@@ -25,6 +25,34 @@ class Gebruikers(DBModel):
             postcode = self.postcode
         )
 
+class Kleur(DBModel):
+
+    __tablename__ = "kleur"
+
+    id = Column(Integer, autoincrement=True, nullable=False, primary_key=True)
+    kleur = Column(VARCHAR(20), nullable=False, index=True)
+
+    def to_dict(self, full=True):
+        return dict(
+            id=self.id,
+            kleur=self.kleur,
+        )
+
+
+class Maat(DBModel):
+
+    __tablename__ = "Maat"
+
+    id = Column(Integer, autoincrement=True, nullable=False, primary_key=True)
+    maat = Column(VARCHAR(10), nullable=False, index=True)
+
+    def to_dict(self, full=True):
+        return dict(
+            id=self.id,
+            maat=self.maat,
+        )
+
+
 class Product(DBModel):
 
     __tablename__ = "product"
@@ -32,8 +60,8 @@ class Product(DBModel):
     id = Column(Integer, autoincrement=True, nullable=False, primary_key=True)
     naam = Column(VARCHAR(40), nullable=False)
     categorie = Column(VARCHAR(40), nullable=False)
-    maat = Column(VARCHAR(5), nullable=False, index=True)
-    kleur = Column(VARCHAR(15), nullable=False, index=True)
+    maat = Column(ForeignKey(Maat.maat), nullable=False)
+    kleur = Column(ForeignKey(Kleur.kleur), nullable=False)
     prijs = Column(Float, nullable=False)
     voorraad = Column(Integer, nullable=False)
     body = Column(VARCHAR(100), nullable=False)
@@ -116,35 +144,6 @@ class BestellingItems(DBModel):
             product_id=self.product_id,
             hoeveelheid=self.hoeveelheid
         )
-
-
-class Kleur(DBModel):
-
-    __tablename__ = "kleur"
-
-    id = Column(Integer, autoincrement=True, nullable=False, primary_key=True)
-    kleur = Column(ForeignKey(Product.kleur), nullable=False)
-
-    def to_dict(self, full=True):
-        return dict(
-            id=self.id,
-            kleur=self.kleur,
-        )
-
-
-class Maat(DBModel):
-
-    __tablename__ = "Maat"
-
-    id = Column(Integer, autoincrement=True, nullable=False, primary_key=True)
-    maat = Column(ForeignKey(Product.maat), nullable=False)
-
-    def to_dict(self, full=True):
-        return dict(
-            id=self.id,
-            maat=self.maat,
-        )
-
 
 
 class Favoriet(DBModel):

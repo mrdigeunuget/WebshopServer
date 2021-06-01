@@ -90,7 +90,7 @@ def product_data(app):
             prijs="19.95",
             voorraad="4",
             imagePath="assets/images/t-shirt_basic.png",
-            body="Dit is een basic t-shirt voor heren",
+            body="Dit is een witte basic t-shirt maat s voor heren",
             manufacturer="company name",
             model="Tx17",
             width="7",
@@ -101,12 +101,12 @@ def product_data(app):
         Product(
             naam="T-Shirt basic",
             categorie="herenkleding",
-            maat="s",
-            kleur="grijs",
+            maat="m",
+            kleur="wit",
             prijs="19.95",
             voorraad="4",
             imagePath="assets/images/t-shirt_basic.png",
-            body="Dit is een basic t-shirt voor heren",
+            body="Dit is een witte basic t-shirt maat m voor heren",
             manufacturer="company name",
             model="Tx17",
             width="7",
@@ -173,7 +173,17 @@ def kleur_data(app):
     )
     app.session.add(
         Kleur(
+            kleur="wit",
+        )
+    )
+    app.session.add(
+        Kleur(
             kleur="grijs",
+        )
+    )
+    app.session.add(
+        Kleur(
+            kleur="rood",
         )
     )
     app.session.flush()
@@ -199,15 +209,16 @@ def setup_db(app, cache):
     print('nieuwe data')
     # drop all databases and clear cache
     DBModel.metadata.drop_all(bind=app.engine)
+
     cache.clear()
 
     # create a new database and add new data
     DBModel.metadata.create_all(bind=app.engine)
 
     gebruikers_data(app)
+    kleur_data(app)
+    maat_data(app)
     product_data(app)
     bestellingen_data(app)
     bestellingItem_data(app)
-    maat_data(app)
-    kleur_data(app)
     favoriet_data(app)
