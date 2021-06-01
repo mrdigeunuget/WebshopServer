@@ -7,11 +7,11 @@ from datetime import datetime, timedelta, timezone
 
 from app import app
 from app.utils import init_routing_func, check_request_data
-from app.obj_utils import get_objs, get_objs_with_filter, create_obj
+from app.obj_utils import get_objs, get_objs_with_filter, create_obj, get_obj_with_filter, get_obj
 from database.tables import Gebruikers, Product, Winkelwagen, Bestellingen, BestellingItems, Maat, Kleur, Favoriet
 
 
-home, get, post = init_routing_func('home', '/webshop/')
+home, get, post = init_routing_func('home', '/home/')
 
 @get('/gebruikers')
 def getGebruikers():
@@ -19,8 +19,18 @@ def getGebruikers():
     return jsonify(gebruikers),200
 
 @get('/product')
-def getProduct():
+def getProducts():
     product=get_objs(Product)
+    return jsonify(product),200
+
+@get('/product/<string:name_id>')
+def getProductsByName(name_id):
+    product=get_obj_with_filter(Product, naam=name_id)
+    return jsonify(product),200
+
+@get('/product/<int:product_id>')
+def getProductById(product_id):
+    product=get_obj_with_filter(Product, id=product_id)
     return jsonify(product),200
 
 # @get('/topscores')

@@ -11,7 +11,7 @@ def load_dot_env():
 class Config:
     load_dot_env()
 
-    PORT = getenv('PORT', 8080)
+    PORT = getenv('PORT', 8081)
     DEBUG = True
 
     dev = getenv('IS_DEV', False)

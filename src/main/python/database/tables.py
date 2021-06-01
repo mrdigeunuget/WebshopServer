@@ -1,4 +1,4 @@
-from sqlalchemy import Table, Column, Integer, ForeignKey, VARCHAR
+from sqlalchemy import Table, Column, Integer, ForeignKey, VARCHAR, Float
 from sqlalchemy.orm import relationship, backref
 from database.db_model import DBModel
 
@@ -34,8 +34,14 @@ class Product(DBModel):
     categorie = Column(VARCHAR(40), nullable=False)
     maat = Column(VARCHAR(5), nullable=False, index=True)
     kleur = Column(VARCHAR(15), nullable=False, index=True)
-    prijs = Column(Integer, nullable=False)
+    prijs = Column(Float, nullable=False)
     voorraad = Column(Integer, nullable=False)
+    body = Column(VARCHAR(100), nullable=False)
+    imagePath = Column(VARCHAR(50), nullable=False)
+    manufacturer = Column(VARCHAR(50), nullable=False)
+    model = Column(VARCHAR(15), nullable=False)
+    width = Column(Integer, nullable=False)
+    height = Column(Integer, nullable=False)
 
     def to_dict(self, full=True):
         return dict(
@@ -45,7 +51,13 @@ class Product(DBModel):
             maat = self.maat,
             kleur = self.kleur,
             prijs = self.prijs,
-            voorraad = self.voorraad
+            voorraad = self.voorraad,
+            body = self.body,
+            imagePath = self.imagePath,
+            manufacturer = self.manufacturer,
+            model = self.model,
+            width = self.width,
+            height = self.height
         )
 
 class Winkelwagen(DBModel):
