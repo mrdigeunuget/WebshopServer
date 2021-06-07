@@ -25,7 +25,7 @@ def getProducts():
 
 @get('/product/<string:name_id>')
 def getProductsByName(name_id):
-    product=get_obj_with_filter(Product, naam=name_id)
+    product=get_objs_with_filter(Product, naam=name_id)
     return jsonify(product),200
 
 @get('/product/<int:product_id>')
@@ -33,21 +33,29 @@ def getProductById(product_id):
     product=get_obj_with_filter(Product, id=product_id)
     return jsonify(product),200
 
-# @get('/topscores')
-# def getTopscores():
-#     topscores=get_objs(TopScore, relations=True)
-#     return jsonify(topscores)
+@get('/product/<string:product_categorie>/<string:product_naam>')
+def getProductByCategorieAndName(product_naam, product_categorie):
+    product=get_objs_with_filter(Product, naam=product_naam, categorie=product_categorie)
+    return jsonify(product),200
 
-# @get('/topscores/game/<int:game_id>')
-# def getTopscoresGame(game_id):
-#     topscores=get_objs_with_filter(TopScore, relations=True, game_id=game_id)
-#     return jsonify(topscores)
+@get('/product/kleuren')
+def getKleuren():
+    kleuren=get_objs(Kleur)
+    return jsonify(kleuren),200
 
-# @post('/user')
-# def saveUser():
-#     data = request.json
-#     message, response_code = check_request_data(data, ["user_name", "user_age"])
-#     if (response_code == 200):
-#         newUser = create_obj(User, data)
-#         message = jsonify(newUser.to_dict())
-#     return message, response_code
+@get('/product/maten')
+def getMaten():
+    maat=get_objs(Maat)
+    return jsonify(maat),200
+
+@post('/product')
+def createProduct():
+    data = request.json
+    message, response_code = check_request_data(data, ["naam", "categorie", "maat", "kleur", "prijs", "voorraad", "body", "imagePath", "manufacturer", "model", "width", "height"])
+    if (response_code == 200):
+        newProduct = create_obj(Product, data)
+        #optioneel om ook weer het product te zien die aangemaakt wordt
+        message = jsonify(newProduct.to_dict())
+    return message, response_code
+
+

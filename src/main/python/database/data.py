@@ -37,8 +37,8 @@ def product_data(app):
         Product(
             naam="T-Shirt basic",
             categorie="herenkleding",
-            maat="s",
-            kleur="rood",
+            maat="S",
+            kleur="Red",
             prijs="19.95",
             voorraad="4",
             imagePath="assets/images/t-shirt_basic.png",
@@ -53,8 +53,8 @@ def product_data(app):
         Product(
             naam="T-Shirt basic",
             categorie="dameskleding",
-            maat="m",
-            kleur="blauw",
+            maat="M",
+            kleur="Blue",
             prijs="19.95",
             voorraad="3",
             imagePath="assets/images/image-placeholder.png",
@@ -69,8 +69,8 @@ def product_data(app):
         Product(
             naam="T-Shirt basic",
             categorie="kinderkleding",
-            maat="s",
-            kleur="rood",
+            maat="S",
+            kleur="Red",
             prijs="15.95",
             voorraad="4",
             imagePath="assets/images/t-shirt_basic.png",
@@ -85,8 +85,8 @@ def product_data(app):
         Product(
             naam="T-Shirt basic",
             categorie="herenkleding",
-            maat="s",
-            kleur="wit",
+            maat="S",
+            kleur="White",
             prijs="19.95",
             voorraad="4",
             imagePath="assets/images/t-shirt_basic.png",
@@ -101,8 +101,8 @@ def product_data(app):
         Product(
             naam="T-Shirt basic",
             categorie="herenkleding",
-            maat="m",
-            kleur="wit",
+            maat="M",
+            kleur="White",
             prijs="19.95",
             voorraad="4",
             imagePath="assets/images/t-shirt_basic.png",
@@ -153,12 +153,12 @@ def maat_data(app):
     click.echo("Adding maten")
     app.session.add(
         Maat(
-            maat="s",
+            maat="S",
         )
     )
     app.session.add(
         Maat(
-            maat="m",
+            maat="M",
         )
     )
     app.session.flush()
@@ -168,22 +168,22 @@ def kleur_data(app):
     click.echo("Adding kleuren")
     app.session.add(
         Kleur(
-            kleur="blauw",
+            kleur="Blue",
         )
     )
     app.session.add(
         Kleur(
-            kleur="wit",
+            kleur="White",
         )
     )
     app.session.add(
         Kleur(
-            kleur="grijs",
+            kleur="Grey",
         )
     )
     app.session.add(
         Kleur(
-            kleur="rood",
+            kleur="Red",
         )
     )
     app.session.flush()
