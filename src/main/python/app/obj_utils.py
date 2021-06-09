@@ -68,6 +68,15 @@ def delete_obj(object_class, obj_id):
             app.session.rollback()
     return False
 
+def change_product(object_class, data, object=False):
+    if object:
+        obj=data
+    else:
+        obj = fill_object_from_data(object_class(), data)
+    app.session.merge(obj)
+    app.session.commit()
+    return obj
+
 def delete_objs_with_filter(object_class, *args, **kwargs):
     objs = app.session.query(object_class).filter_by(*args, **kwargs).all()
     if objs:
@@ -85,3 +94,5 @@ def fill_object_from_data(obj, data, exclude=[]):
     for attribute in attributes:
         setattr(obj, attribute, data[attribute])
     return obj
+
+

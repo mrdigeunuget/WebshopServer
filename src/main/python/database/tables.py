@@ -52,6 +52,18 @@ class Maat(DBModel):
             maat=self.maat,
         )
 
+class Categorie(DBModel):
+
+    __tablename__ = "categorie"
+
+    id = Column(Integer, autoincrement=True, nullable=False, primary_key=True)
+    categorie = Column(VARCHAR(25), nullable=False, unique=True)
+
+    def to_dict(self, full=True):
+        return dict(
+            id=self.id,
+            categorie=self.categorie,
+        )
 
 class Product(DBModel):
 
@@ -59,7 +71,7 @@ class Product(DBModel):
 
     id = Column(Integer, autoincrement=True, nullable=False, primary_key=True)
     naam = Column(VARCHAR(40), nullable=False)
-    categorie = Column(VARCHAR(40), nullable=False)
+    categorie = Column(ForeignKey(Categorie.categorie), nullable=False)
     maat = Column(ForeignKey(Maat.maat), nullable=False)
     kleur = Column(ForeignKey(Kleur.kleur), nullable=False)
     prijs = Column(Float, nullable=False)

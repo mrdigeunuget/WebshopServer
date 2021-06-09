@@ -7,11 +7,11 @@ from datetime import datetime, timedelta, timezone
 
 from app import app
 from app.utils import init_routing_func, check_request_data
-from app.obj_utils import get_objs, get_objs_with_filter, create_obj, get_obj_with_filter, get_obj
+from app.obj_utils import get_objs, get_objs_with_filter, create_obj, get_obj_with_filter, get_obj, change_product
 from database.tables import Gebruikers, Product, Winkelwagen, Bestellingen, BestellingItems, Maat, Kleur, Favoriet
 
 
-home, get, post = init_routing_func('home', '/home/')
+home, get, post, put = init_routing_func('home', '/home/')
 
 @get('/gebruikers')
 def getGebruikers():
@@ -38,6 +38,17 @@ def getProductByCategorieAndName(product_naam, product_categorie):
     product=get_objs_with_filter(Product, naam=product_naam, categorie=product_categorie)
     return jsonify(product),200
 
+@get('/product/<string:product_categorie>/<string:product_naam>/<string:product_kleur>/<string:product_maat>')
+def getFirstProduct(product_naam, product_categorie, product_kleur, product_maat):
+    product=get_obj_with_filter(Product, naam=product_naam, categorie=product_categorie, kleur=product_kleur, maat=product_maat)
+    return jsonify(product),200
+
+@get('/products/<string:product_categorie>')
+def getProductsByCategorie(product_categorie):
+    product=get_objs_with_filter(Product, categorie = product_categorie)
+    return jsonify(product),200
+
+
 @get('/product/kleuren')
 def getKleuren():
     kleuren=get_objs(Kleur)
@@ -48,7 +59,7 @@ def getMaten():
     maat=get_objs(Maat)
     return jsonify(maat),200
 
-@post('/product')
+@post('/product/create')
 def createProduct():
     data = request.json
     message, response_code = check_request_data(data, ["naam", "categorie", "maat", "kleur", "prijs", "voorraad", "body", "imagePath", "manufacturer", "model", "width", "height"])
@@ -58,4 +69,15 @@ def createProduct():
         message = jsonify(newProduct.to_dict())
     return message, response_code
 
+@put('/product/update')
+def updateProduct():
+    data = request.json
+    message, response_code = check_request_data(data,
+                                                ["id", "naam", "categorie", "maat", "kleur", "prijs", "voorraad", "body",
+                                                 "imagePath", "manufacturer", "model", "width", "height"])
+    if (response_code == 200):
+        newProduct = change_product(Product, data)
+        # optioneel om ook weer het product te zien die aangemaakt wordt
+        message = jsonify(newProduct.to_dict())
+    return message, response_code
 

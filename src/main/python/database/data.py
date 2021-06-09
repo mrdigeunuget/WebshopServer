@@ -2,7 +2,7 @@ from datetime import datetime, date
 import click
 
 from database.db_model import DBModel
-from database.tables import Gebruikers, Product, Winkelwagen, Bestellingen, BestellingItems, Maat, Kleur, Favoriet
+from database.tables import Gebruikers, Product, Winkelwagen, Bestellingen, BestellingItems, Maat, Kleur, Favoriet, Categorie
 
 
 
@@ -36,7 +36,7 @@ def product_data(app):
     app.session.add(
         Product(
             naam="T-Shirt basic",
-            categorie="herenkleding",
+            categorie="Men",
             maat="S",
             kleur="Red",
             prijs="19.95",
@@ -52,7 +52,7 @@ def product_data(app):
     app.session.add(
         Product(
             naam="T-Shirt basic",
-            categorie="dameskleding",
+            categorie="Woman",
             maat="M",
             kleur="Blue",
             prijs="19.95",
@@ -68,7 +68,7 @@ def product_data(app):
     app.session.add(
         Product(
             naam="T-Shirt basic",
-            categorie="kinderkleding",
+            categorie="Kids",
             maat="S",
             kleur="Red",
             prijs="15.95",
@@ -84,7 +84,7 @@ def product_data(app):
     app.session.add(
         Product(
             naam="T-Shirt basic",
-            categorie="herenkleding",
+            categorie="Men",
             maat="S",
             kleur="White",
             prijs="19.95",
@@ -100,7 +100,7 @@ def product_data(app):
     app.session.add(
         Product(
             naam="T-Shirt basic",
-            categorie="herenkleding",
+            categorie="Men",
             maat="M",
             kleur="White",
             prijs="19.95",
@@ -189,6 +189,27 @@ def kleur_data(app):
     app.session.flush()
     app.session.commit()
 
+def categorie_data(app):
+    click.echo("Adding categorie")
+    app.session.add(
+        Categorie(
+            categorie="Men",
+        )
+    )
+    app.session.add(
+        Categorie(
+            categorie="Kids",
+        )
+    )
+    app.session.add(
+        Categorie(
+            categorie="Woman",
+        )
+    )
+    app.session.flush()
+    app.session.commit()
+
+
 def favoriet_data(app):
     click.echo("Adding kleuren")
     app.session.add(
@@ -218,6 +239,7 @@ def setup_db(app, cache):
     gebruikers_data(app)
     kleur_data(app)
     maat_data(app)
+    categorie_data(app)
     product_data(app)
     bestellingen_data(app)
     bestellingItem_data(app)

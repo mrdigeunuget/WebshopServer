@@ -7,7 +7,8 @@ def init_routing_func(name, url_prefix):
     route = AuthBlueprint(name, __name__, url_prefix=url_prefix)
     get = partial(route.route, methods=["GET"])
     post = partial(route.route, methods=["POST"])
-    return route, get, post
+    put = partial(route.route, methods=["PUT"])
+    return route, get, post, put
 
 def check_request_data(data, items):
     message = None
