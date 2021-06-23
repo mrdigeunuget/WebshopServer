@@ -1,17 +1,18 @@
 from flask import Flask, request, jsonify
 from flask_jwt_extended import (
     JWTManager, jwt_required, create_access_token, create_refresh_token,
-    get_jwt_identity, get_jwt
+    get_jwt_identity, get_jwt, set_access_cookies
 )
 from datetime import datetime, timedelta, timezone
+import logging
 
 from app import app
 from app.utils import init_routing_func, check_request_data
-from app.obj_utils import get_objs, get_objs_with_filter, create_obj, get_obj_with_filter, get_obj, change_product
+from app.obj_utils import get_objs, get_objs_with_filter, create_obj, get_obj_with_filter, get_obj, change_product, delete_obj, delete_objs_with_filter, get_objs_distinct, get_distinct_producten
 from database.tables import Gebruikers, Product, Winkelwagen, Bestellingen, BestellingItems, Maat, Kleur, Favoriet
 
 
-home, get, post, put = init_routing_func('home', '/home/')
+home, get, post, put, delete = init_routing_func('home', '/home/')
 
 @get('/gebruikers')
 def getGebruikers():
@@ -33,6 +34,16 @@ def getProductById(product_id):
     product=get_obj_with_filter(Product, id=product_id)
     return jsonify(product),200
 
+@get('/allProduct')
+def getDistinctProducten():
+    product = get_distinct_producten(Product)
+    return jsonify(product),200
+
+@delete('/delete/<int:product_id>')
+def deleteProduct(product_id):
+    obj = delete_objs_with_filter(Product, id=product_id)
+    return jsonify(obj),200
+
 @get('/product/<string:product_categorie>/<string:product_naam>')
 def getProductByCategorieAndName(product_naam, product_categorie):
     product=get_objs_with_filter(Product, naam=product_naam, categorie=product_categorie)
@@ -51,13 +62,13 @@ def getProductsByCategorie(product_categorie):
 
 @get('/product/kleuren')
 def getKleuren():
-    kleuren=get_objs(Kleur)
-    return jsonify(kleuren),200
+    kleuren = get_objs_distinct(Kleur.kleur)
+    return jsonify(kleuren), 200
 
 @get('/product/maten')
 def getMaten():
-    maat=get_objs(Maat)
-    return jsonify(maat),200
+    maten = get_objs_distinct(Maat.maat)
+    return jsonify(maten), 200
 
 @post('/product/create')
 def createProduct():
@@ -80,4 +91,26 @@ def updateProduct():
         # optioneel om ook weer het product te zien die aangemaakt wordt
         message = jsonify(newProduct.to_dict())
     return message, response_code
+
+
+@post('/login')
+def parse_request():
+    data = request.json
+    message, response_code = check_request_data(data,
+                                                ["email" , "wachtwoord"])
+    logging.warning(data)
+    if(response_code == 200):
+        checkUser = get_obj_with_filter(Gebruikers, data)
+        logging.warning(checkUser)
+        access_token = create_access_token(identity=checkUser['id'])
+        resp = jsonify({'login':True})
+        logging.warning(access_token)
+        set_access_cookies(resp,access_token)
+        return resp,200
+    else:
+        return jsonify({'error':'incorrect credentials'}), 401
+
+
+
+
 

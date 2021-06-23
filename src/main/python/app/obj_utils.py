@@ -1,5 +1,5 @@
 from sqlalchemy.exc import IntegrityError
-
+import logging
 from app import app
 
 def get_objs(object_class, dict=True, relations=False):
@@ -95,4 +95,26 @@ def fill_object_from_data(obj, data, exclude=[]):
         setattr(obj, attribute, data[attribute])
     return obj
 
+def get_objs_distinct(object_class, dict=False, relations=False):
+    data = []
+    objs = app.session.query(object_class).distinct()
+    if objs:
+        if dict:
+            return [obj.to_dict(relations) for obj in objs]
+        else:
 
+            for row in objs:
+                data.append(list(row))
+            return data
+    else:
+        return []
+
+def get_distinct_producten(object_class, dict=True, relations=False):
+    objs = app.session.query(object_class).group_by(object_class.naam, object_class.categorie).all()
+    if objs:
+        if dict:
+            return [obj.to_dict(relations) for obj in objs]
+        else:
+            return [obj for obj in objs]
+    else:
+        return []

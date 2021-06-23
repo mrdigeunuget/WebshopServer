@@ -3,12 +3,16 @@ from flask import json, jsonify
 
 from app.authorization import AuthBlueprint
 
+
+gebruikers = []
+
 def init_routing_func(name, url_prefix):
     route = AuthBlueprint(name, __name__, url_prefix=url_prefix)
     get = partial(route.route, methods=["GET"])
     post = partial(route.route, methods=["POST"])
     put = partial(route.route, methods=["PUT"])
-    return route, get, post, put
+    delete = partial(route.route, methods=["DELETE"])
+    return route, get, post, put, delete
 
 def check_request_data(data, items):
     message = None
@@ -22,3 +26,8 @@ def check_request_data(data, items):
                 message =  jsonify({'error':'no ' + item + ' provided'})
                 response_code = 400
     return message, response_code
+
+def check_credentials(user, pwd):
+    gebruikers = getGebruikers()
+
+

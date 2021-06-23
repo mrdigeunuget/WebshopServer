@@ -11,6 +11,7 @@ class Gebruikers(DBModel):
     voornaam = Column(VARCHAR(40), nullable=False)
     achternaam = Column(VARCHAR(40), nullable=False)
     email = Column(VARCHAR(40), nullable=False)
+    wachtwoord = Column(VARCHAR(40), nullable=False)
     straatnaam = Column(VARCHAR(40), nullable=False)
     huisnummer = Column(VARCHAR(10), nullable=False)
     postcode = Column(VARCHAR(10), nullable=False)

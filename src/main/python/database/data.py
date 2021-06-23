@@ -13,6 +13,7 @@ def gebruikers_data(app):
             voornaam="Jan",
             achternaam="Janssen",
             email="Janjanssen@gmail.com",
+            wachtwoord="Wachtwoord",
             straatnaam="Mudaheerd",
             huisnummer="73",
             postcode="9737XB",
@@ -23,6 +24,7 @@ def gebruikers_data(app):
             voornaam="Henk",
             achternaam="Henksen",
             email="Henkhenksen@gmail.com",
+            wachtwoord="wachtwoord",
             straatnaam="Framaheerd",
             huisnummer="4",
             postcode="9737NL",
@@ -161,6 +163,16 @@ def maat_data(app):
             maat="M",
         )
     )
+    app.session.add(
+        Maat(
+            maat="L",
+        )
+    )
+    app.session.add(
+        Maat(
+            maat="XL",
+        )
+    )
     app.session.flush()
     app.session.commit()
 
@@ -184,6 +196,11 @@ def kleur_data(app):
     app.session.add(
         Kleur(
             kleur="Red",
+        )
+    )
+    app.session.add(
+        Kleur(
+            kleur="Green",
         )
     )
     app.session.flush()
