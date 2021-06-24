@@ -73,6 +73,7 @@ class Product(DBModel):
     id = Column(Integer, autoincrement=True, nullable=False, primary_key=True)
     naam = Column(VARCHAR(40), nullable=False)
     categorie = Column(ForeignKey(Categorie.categorie), nullable=False)
+    subcategorie = Column(VARCHAR(40), nullable=False)
     maat = Column(ForeignKey(Maat.maat), nullable=False)
     kleur = Column(ForeignKey(Kleur.kleur), nullable=False)
     prijs = Column(Float, nullable=False)
@@ -89,6 +90,7 @@ class Product(DBModel):
             id = self.id,
             naam = self.naam,
             categorie = self.categorie,
+            subcategorie = self.subcategorie,
             maat = self.maat,
             kleur = self.kleur,
             prijs = self.prijs,
