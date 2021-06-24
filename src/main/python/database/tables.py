@@ -73,7 +73,7 @@ class Product(DBModel):
     id = Column(Integer, autoincrement=True, nullable=False, primary_key=True)
     naam = Column(VARCHAR(40), nullable=False)
     categorie = Column(ForeignKey(Categorie.categorie), nullable=False)
-    subcategorie = Column(VARCHAR(40), nullable=False)
+    subcategorie = Column(VARCHAR(40), nullable=True)
     maat = Column(ForeignKey(Maat.maat), nullable=False)
     kleur = Column(ForeignKey(Kleur.kleur), nullable=False)
     prijs = Column(Float, nullable=False)
@@ -82,8 +82,6 @@ class Product(DBModel):
     imagePath = Column(VARCHAR(50), nullable=False)
     manufacturer = Column(VARCHAR(50), nullable=False)
     model = Column(VARCHAR(15), nullable=False)
-    width = Column(Integer, nullable=False)
-    height = Column(Integer, nullable=False)
 
     def to_dict(self, full=True):
         return dict(
@@ -99,8 +97,6 @@ class Product(DBModel):
             imagePath = self.imagePath,
             manufacturer = self.manufacturer,
             model = self.model,
-            width = self.width,
-            height = self.height
         )
 
 class Winkelwagen(DBModel):

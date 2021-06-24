@@ -73,7 +73,7 @@ def getMaten():
 @post('/product/create')
 def createProduct():
     data = request.json
-    message, response_code = check_request_data(data, ["naam", "categorie", "maat", "kleur", "prijs", "voorraad", "body", "imagePath", "manufacturer", "model", "width", "height"])
+    message, response_code = check_request_data(data, ["naam", "categorie", "maat", "kleur", "prijs", "voorraad", "body", "imagePath", "manufacturer", "model"])
     if (response_code == 200):
         newProduct = create_obj(Product, data)
         #optioneel om ook weer het product te zien die aangemaakt wordt
@@ -85,7 +85,7 @@ def updateProduct():
     data = request.json
     message, response_code = check_request_data(data,
                                                 ["id", "naam", "categorie", "maat", "kleur", "prijs", "voorraad", "body",
-                                                 "imagePath", "manufacturer", "model", "width", "height"])
+                                                 "imagePath", "manufacturer", "model"])
     if (response_code == 200):
         newProduct = change_product(Product, data)
         # optioneel om ook weer het product te zien die aangemaakt wordt
