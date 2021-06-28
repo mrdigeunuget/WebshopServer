@@ -15,6 +15,7 @@ class Gebruikers(DBModel):
     straatnaam = Column(VARCHAR(40), nullable=False)
     huisnummer = Column(VARCHAR(10), nullable=False)
     postcode = Column(VARCHAR(10), nullable=False)
+    admin = Column(Integer, nullable=False, default=2)
 
     def to_dict(self, full=True):
         return dict(
@@ -23,7 +24,8 @@ class Gebruikers(DBModel):
             email = self.email,
             straatnaam = self.straatnaam,
             huisnummer = self.huisnummer,
-            postcode = self.postcode
+            postcode = self.postcode,
+            admin = self.admin
         )
 
 class Kleur(DBModel):

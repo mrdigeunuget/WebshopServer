@@ -21,6 +21,18 @@ def gebruikers_data(app):
     )
     app.session.add(
         Gebruikers(
+            voornaam="Test",
+            achternaam="Admin",
+            email="admin@gmail.com",
+            wachtwoord="admin",
+            straatnaam="Mudaheerd",
+            huisnummer="73",
+            postcode="9737XB",
+            admin = 1,
+        )
+    )
+    app.session.add(
+        Gebruikers(
             voornaam="Henk",
             achternaam="Henksen",
             email="Henkhenksen@gmail.com",

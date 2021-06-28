@@ -8,7 +8,7 @@ import logging
 
 from app import app
 from app.utils import init_routing_func, check_request_data
-from app.obj_utils import get_objs, get_objs_with_filter, create_obj, get_obj_with_filter, get_obj, change_product, delete_obj, delete_objs_with_filter, get_objs_distinct, get_distinct_producten
+from app.obj_utils import get_objs, get_objs_with_filter, create_obj, get_obj_with_filter, get_obj, change_product, delete_obj, delete_objs_with_filter, get_objs_distinct, get_distinct_producten, get_user_data, check_password
 from database.tables import Gebruikers, Product, Winkelwagen, Bestellingen, BestellingItems, Maat, Kleur, Favoriet
 
 
@@ -109,6 +109,22 @@ def parse_request():
         return resp,200
     else:
         return jsonify({'error':'incorrect credentials'}), 401
+
+@get('/userdata/<string:usr>')
+def getUserData(usr):
+    user = get_user_data(Gebruikers, email = usr)
+    if (user != None):
+        return jsonify(user)
+    else:
+        return jsonify(user),401
+
+@get('/login/<string:usr>/<string:pwd>')
+def checkPassword(usr, pwd):
+    check = check_password(Gebruikers, email = usr, wachtwoord = pwd)
+    if(check):
+        return jsonify(check),200
+    else:
+        return jsonify(check),401
 
 
 

@@ -1,5 +1,6 @@
 from sqlalchemy.exc import IntegrityError
 import logging
+from sqlalchemy.orm import defer
 from app import app
 
 def get_objs(object_class, dict=True, relations=False):
@@ -118,3 +119,20 @@ def get_distinct_producten(object_class, dict=True, relations=False):
             return [obj for obj in objs]
     else:
         return []
+
+def get_user_data(object_class, dict=True, *args, **kwargs):
+    obj = app.session.query(object_class).filter_by(*args, **kwargs).options(defer('wachtwoord')).first()
+    if obj:
+        if dict:
+            return obj.to_dict(False)
+        else:
+            return obj
+    else:
+        return None
+
+def check_password(object_class, *args, **kwargs):
+    obj = app.session.query(object_class).filter_by(*args, **kwargs).first()
+    if obj:
+        return True
+    else:
+        return False
