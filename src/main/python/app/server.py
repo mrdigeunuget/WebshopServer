@@ -14,10 +14,6 @@ from database.tables import Gebruikers, Product, Winkelwagen, Bestellingen, Best
 
 home, get, post, put, delete = init_routing_func('home', '/home/')
 
-@get('/gebruikers')
-def getGebruikers():
-    gebruikers=get_objs(Gebruikers)
-    return jsonify(gebruikers),200
 
 @get('/product')
 def getProducts():
@@ -80,6 +76,8 @@ def createProduct():
         message = jsonify(newProduct.to_dict())
     return message, response_code
 
+
+
 @put('/product/update')
 def updateProduct():
     data = request.json
@@ -92,23 +90,6 @@ def updateProduct():
         message = jsonify(newProduct.to_dict())
     return message, response_code
 
-
-@post('/login')
-def parse_request():
-    data = request.json
-    message, response_code = check_request_data(data,
-                                                ["email" , "wachtwoord"])
-    logging.warning(data)
-    if(response_code == 200):
-        checkUser = get_obj_with_filter(Gebruikers, data)
-        logging.warning(checkUser)
-        access_token = create_access_token(identity=checkUser['id'])
-        resp = jsonify({'login':True})
-        logging.warning(access_token)
-        set_access_cookies(resp,access_token)
-        return resp,200
-    else:
-        return jsonify({'error':'incorrect credentials'}), 401
 
 @get('/userdata/<string:usr>')
 def getUserData(usr):

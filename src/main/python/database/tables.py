@@ -18,15 +18,22 @@ class Gebruikers(DBModel):
     admin = Column(Integer, nullable=False, default=2)
 
     def to_dict(self, full=True):
-        return dict(
-            id = self.id,
-            voornaam = self.voornaam,
-            email = self.email,
-            straatnaam = self.straatnaam,
-            huisnummer = self.huisnummer,
-            postcode = self.postcode,
-            admin = self.admin
-        )
+        if (full):
+            return dict(
+                id = self.id,
+                voornaam = self.voornaam,
+                achternaam = self.achternaam,
+                email = self.email,
+                straatnaam = self.straatnaam,
+                huisnummer = self.huisnummer,
+                postcode = self.postcode,
+                admin = self.admin
+            )
+        else:
+            return dict(
+                id = self.id,
+                admin = self.admin,
+            )
 
 class Kleur(DBModel):
 
