@@ -30,3 +30,21 @@ def createUser():
         # optioneel om ook weer het product te zien die aangemaakt wordt
         message = jsonify(newProduct.to_dict())
     return message, response_code
+
+
+@get('/<string:usr>')
+def getUserData(usr):
+    user = get_user_data(Gebruikers, email = usr)
+    if (user != None):
+        return jsonify(user)
+    else:
+        return jsonify(user),401
+
+@get('/<string:usr>/<string:pwd>')
+def checkPassword(usr, pwd):
+    check = check_password(Gebruikers, email = usr, wachtwoord = pwd)
+    if(check):
+        return jsonify(check),200
+    else:
+        return jsonify(check),401
+

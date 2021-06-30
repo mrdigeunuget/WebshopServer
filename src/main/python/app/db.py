@@ -6,7 +6,7 @@ __all__ = ["Query", "create_engine_and_session"]
 from database.db_model import DBModel
 
 def create_engine_and_session(app):
-    app.engine = create_engine(app.config["SQLALCHEMY_DATABASE_URI"], pool_size = 20, max_overflow = 0)
+    app.engine = create_engine(app.config["SQLALCHEMY_DATABASE_URI"], pool_size = 40, max_overflow = 0)
 
     app.session = scoped_session(
         sessionmaker(
