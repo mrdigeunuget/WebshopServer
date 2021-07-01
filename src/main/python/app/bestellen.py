@@ -33,6 +33,17 @@ def openOrder():
         message = jsonify(order.to_dict())
     return message, response_code
 
+@put('update')
+def updateOrder():
+    data = request.json
+    message, response_code = check_request_data(data,
+                                                ["id", "prijs", "aantal_artikelen", "datum"])
+    if (response_code == 200):
+        newProduct = change_product(Bestellingen, data)
+        # optioneel om ook weer het product te zien die aangemaakt wordt
+        message = jsonify(newProduct.to_dict())
+    return message, response_code
+
 
 
 

@@ -135,7 +135,7 @@ class Bestellingen(DBModel):
 
     id = Column(Integer, autoincrement=True, nullable=False, primary_key=True)
     gebruikers_id = Column(ForeignKey(Gebruikers.id), nullable=False)
-    prijs = Column(Integer)
+    prijs = Column(Float)
     aantal_artikelen = Column(Integer)
     datum = Column(VARCHAR(30))
 
