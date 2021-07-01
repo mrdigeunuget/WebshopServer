@@ -17,22 +17,22 @@ class Gebruikers(DBModel):
     postcode = Column(VARCHAR(10), nullable=False)
     admin = Column(Integer, nullable=False, default=2)
 
-    def to_dict(self, full=True):
+    def to_dict(self, full=False):
         if (full):
             return dict(
-                id = self.id,
-                voornaam = self.voornaam,
-                achternaam = self.achternaam,
-                email = self.email,
-                straatnaam = self.straatnaam,
-                huisnummer = self.huisnummer,
-                postcode = self.postcode,
-                admin = self.admin
+                id=self.id,
+                admin=self.admin,
             )
         else:
             return dict(
-                id = self.id,
-                admin = self.admin,
+                id=self.id,
+                voornaam=self.voornaam,
+                achternaam=self.achternaam,
+                email=self.email,
+                straatnaam=self.straatnaam,
+                huisnummer=self.huisnummer,
+                postcode=self.postcode,
+                admin=self.admin
             )
 
 class Kleur(DBModel):
@@ -132,9 +132,9 @@ class Bestellingen(DBModel):
 
     __tablename__ = "bestellingen"
 
-    id = Column(Integer, nullable=False, primary_key=True)
+    id = Column(Integer, autoincrement=True, nullable=False, primary_key=True)
     gebruikers_id = Column(ForeignKey(Gebruikers.id), nullable=False)
-    prijs = Column(Integer, nullable=False)
+    prijs = Column(Integer)
     aantal_artikelen = Column(Integer)
     datum = Column(VARCHAR(30))
 
@@ -159,7 +159,6 @@ class BestellingItems(DBModel):
 
     def to_dict(self, full=True):
         return dict(
-            bestellingItem_id=self.bestellingItem_id,
             bestelling_id=self.bestelling_id,
             product_id=self.product_id,
             hoeveelheid=self.hoeveelheid

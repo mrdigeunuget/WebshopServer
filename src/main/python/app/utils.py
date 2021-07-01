@@ -27,7 +27,6 @@ def check_request_data(data, items):
                 response_code = 400
     return message, response_code
 
-def check_credentials(user, pwd):
-    gebruikers = getGebruikers()
+
 
 

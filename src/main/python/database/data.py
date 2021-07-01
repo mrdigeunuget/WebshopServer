@@ -100,7 +100,7 @@ def product_data(app):
             maat="S",
             kleur="Green",
             prijs="15.95",
-            voorraad="4",
+            voorraad="0",
             imagePath="assets/images/men_t-shirt_basic.png",
             body="Dit is een basic t-shirt voor kinderen",
             manufacturer="company name",
@@ -206,11 +206,15 @@ def bestellingen_data(app):
     click.echo("Adding bestellingen")
     app.session.add(
         Bestellingen(
-            id="1",
             gebruikers_id="1",
             prijs="20",
             aantal_artikelen="2",
             datum="maandag",
+        )
+    )
+    app.session.add(
+        Bestellingen(
+            gebruikers_id="2",
         )
     )
     app.session.flush()

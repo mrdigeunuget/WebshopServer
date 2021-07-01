@@ -125,7 +125,7 @@ def get_user_data(object_class, dict=True, *args, **kwargs):
     obj = app.session.query(object_class).filter_by(*args, **kwargs).first()
     if obj:
         if dict:
-            return obj.to_dict(False)
+            return obj.to_dict(True)
         else:
             return obj
     else:

@@ -6,19 +6,27 @@ from flask_jwt_extended import (
 from datetime import datetime, timedelta, timezone
 import logging
 
+import jwt
+
 from app import app
 from app.utils import init_routing_func, check_request_data
 from app.obj_utils import get_objs, get_objs_with_filter, create_obj, get_obj_with_filter, get_obj, change_product, delete_obj, delete_objs_with_filter, get_objs_distinct, get_distinct_producten, get_user_data, check_password
-from database.tables import Gebruikers, Product, Winkelwagen, Bestellingen, BestellingItems, Maat, Kleur, Favoriet
+from database.tables import Gebruikers
 
 
 login, get, post, put, delete = init_routing_func('login', '/login/')
 
 
-@get('/gebruikers')
+@get('/userdata')
 def getGebruikers():
-    gebruikers=get_objs(Gebruikers)
-    return jsonify(gebruikers),200
+    header = request.headers.get("Authorization")
+    logging.warning(header)
+    if (header == "No token"):
+        return jsonify("No user logged in"), 401
+    else:
+        jwtpayload = jwt.decode(header, verify=False)
+        gebruiker=get_obj_with_filter(Gebruikers, id = jwtpayload["id"])
+        return jsonify(gebruiker),200
 
 @post('/user/create')
 def createUser():

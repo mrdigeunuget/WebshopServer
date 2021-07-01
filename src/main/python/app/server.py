@@ -9,7 +9,7 @@ import logging
 from app import app
 from app.utils import init_routing_func, check_request_data
 from app.obj_utils import get_objs, get_objs_with_filter, create_obj, get_obj_with_filter, get_obj, change_product, delete_obj, delete_objs_with_filter, get_objs_distinct, get_distinct_producten, get_user_data, check_password
-from database.tables import Gebruikers, Product, Winkelwagen, Bestellingen, BestellingItems, Maat, Kleur, Favoriet
+from database.tables import Product, Maat, Kleur, Favoriet
 
 
 home, get, post, put, delete = init_routing_func('home', '/home/')
