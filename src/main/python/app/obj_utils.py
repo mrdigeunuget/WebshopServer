@@ -77,7 +77,7 @@ def change_product(object_class, data, object=False):
         obj = fill_object_from_data(object_class(), data)
     app.session.merge(obj)
     app.session.commit()
-    return True
+    return obj
 
 def delete_objs_with_filter(object_class, *args, **kwargs):
     objs = app.session.query(object_class).filter_by(*args, **kwargs).all()
