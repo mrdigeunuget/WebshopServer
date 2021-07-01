@@ -30,6 +30,7 @@ class Gebruikers(DBModel):
                 achternaam=self.achternaam,
                 email=self.email,
                 straatnaam=self.straatnaam,
+                wachtwoord=self.wachtwoord,
                 huisnummer=self.huisnummer,
                 postcode=self.postcode,
                 admin=self.admin
