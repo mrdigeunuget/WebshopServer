@@ -56,3 +56,16 @@ def checkPassword(usr, pwd):
     else:
         return jsonify(check),401
 
+@post('/update')
+def updateUser():
+    data = request.json
+    message, response_code = check_request_data(data,
+                                                ["id", "voornaam", "achternaam", "email", "wachtwoord", "straatnaam",
+                                                 "huisnummer", "postcode"])
+    if (response_code == 200):
+        newProduct = change_product(Gebruikers, data)
+        # optioneel om ook weer het product te zien die aangemaakt wordt
+        message = jsonify(newProduct.to_dict())
+    return message, response_code
+
+
