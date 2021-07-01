@@ -80,6 +80,20 @@ def product_data(app):
     app.session.add(
         Product(
             naam="T-Shirt basic",
+            categorie="Kids",
+            maat="S",
+            kleur="Red",
+            prijs="19.95",
+            voorraad="4",
+            imagePath="assets/images/men_t-shirt_basic.png",
+            body="Dit is een basic t-shirt voor heren",
+            manufacturer="company name",
+            model="Tx17",
+        )
+    )
+    app.session.add(
+        Product(
+            naam="T-Shirt basic",
             categorie="Woman",
             subcategorie="Shirts",
             maat="M",
@@ -88,6 +102,21 @@ def product_data(app):
             voorraad="3",
             imagePath="assets/images/woman_t-shirt_basic.png",
             body="Dit is een blauwe basic t-shirt voor dames",
+            manufacturer="company name",
+            model="Tx17",
+        )
+    )
+    app.session.add(
+        Product(
+            naam="Sweater basic",
+            categorie="Woman",
+            subcategorie="Sweaters",
+            maat="S",
+            kleur="White",
+            prijs="22.95",
+            voorraad="2",
+            imagePath="assets/images/woman_sweater_basic.png",
+            body="Dit is een witte basic sweater voor dames",
             manufacturer="company name",
             model="Tx17",
         )
