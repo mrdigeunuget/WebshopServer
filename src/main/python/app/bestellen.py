@@ -44,6 +44,23 @@ def updateOrder():
         message = jsonify(newProduct.to_dict())
     return message, response_code
 
+@get('/allOrder/<int:id>')
+def getAllOrders(id):
+    bestelling=get_objs_with_filter(Bestellingen, gebruikers_id = id)
+    return jsonify(bestelling),200
+
+@get('/orderItems/<int:id>')
+def getOrderItems(id):
+    item=get_objs_with_filter(BestellingItems, bestelling_id = id)
+    return jsonify(item),200
+
+@get('/itemDet/<int:id>')
+def getItemDetails(id):
+    bestelling=get_objs_with_filter(Product, id = id)
+    return jsonify(bestelling),200
+
+
+
 
 
 

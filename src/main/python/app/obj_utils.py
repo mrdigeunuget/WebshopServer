@@ -4,15 +4,21 @@ from sqlalchemy.orm import defer
 from sqlalchemy.orm import load_only
 from app import app
 
-def get_objs(object_class, dict=True, relations=False):
+def get_objs(object_class, dict=True, relations=False, maat=False):
     objs = app.session.query(object_class).all()
-    if objs:
-        if dict:
-            return [obj.to_dict(relations) for obj in objs]
+    if (maat == False):
+        if objs:
+            if dict:
+                return [obj.to_dict(relations) for obj in objs]
+            else:
+                return [obj for obj in objs]
         else:
-            return [obj for obj in objs]
+            return []
     else:
-        return []
+        data = []
+        for row in objs:
+            data.append(list(row))
+        return data
 
 def get_objs_with_filter(object_class, dict=True, relations=False, *args, **kwargs):
     objs = app.session.query(object_class).filter_by(*args, **kwargs).all()

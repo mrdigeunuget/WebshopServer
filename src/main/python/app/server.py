@@ -58,12 +58,12 @@ def getProductsByCategorie(product_categorie):
 
 @get('/product/kleuren')
 def getKleuren():
-    kleuren = get_objs_distinct(Kleur.kleur)
+    kleuren = get_objs(Kleur.kleur, maat=True)
     return jsonify(kleuren), 200
 
 @get('/product/maten')
 def getMaten():
-    maten = get_objs_distinct(Maat.maat)
+    maten = get_objs(Maat.maat, maat=True)
     return jsonify(maten), 200
 
 @post('/product/create')
@@ -89,6 +89,8 @@ def updateProduct():
         # optioneel om ook weer het product te zien die aangemaakt wordt
         message = jsonify(newProduct.to_dict())
     return message, response_code
+
+
 
 
 

@@ -64,15 +64,15 @@ def product_data(app):
     )
     app.session.add(
         Product(
-            naam="T-Shirt print",
+            naam="Sweater basic",
             categorie="Men",
-            subcategorie="Shirts",
-            maat="L",
-            kleur="White",
-            prijs="19.95",
-            voorraad="4",
-            imagePath="assets/images/men_t-shirt_print.png",
-            body="Dit is een print t-shirt voor heren",
+            subcategorie="Sweaters",
+            maat="S",
+            kleur="Blue",
+            prijs="32.95",
+            voorraad="7",
+            imagePath="assets/images/men_sweater_basic.png",
+            body="Dit is een basic sweater voor heren",
             manufacturer="company name",
             model="Tx17",
         )
@@ -81,12 +81,28 @@ def product_data(app):
         Product(
             naam="T-Shirt basic",
             categorie="Kids",
+            subcategorie="Shirts",
             maat="S",
             kleur="Red",
             prijs="19.95",
             voorraad="4",
             imagePath="assets/images/men_t-shirt_basic.png",
-            body="Dit is een basic t-shirt voor heren",
+            body="Dit is een basic t-shirt voor kinderen",
+            manufacturer="company name",
+            model="Tx17",
+        )
+    )
+    app.session.add(
+        Product(
+            naam="T-Shirt basic",
+            categorie="Kids",
+            subcategorie="Shirts",
+            maat="S",
+            kleur="Black",
+            prijs="19.95",
+            voorraad="6",
+            imagePath="assets/images/men_t-shirt_basic.png",
+            body="Dit is een basic t-shirt voor kinderen",
             manufacturer="company name",
             model="Tx17",
         )
@@ -101,7 +117,37 @@ def product_data(app):
             prijs="19.95",
             voorraad="3",
             imagePath="assets/images/woman_t-shirt_basic.png",
+            body="Dit is een grijze basic t-shirt voor dames",
+            manufacturer="company name",
+            model="Tx17",
+        )
+    )
+    app.session.add(
+        Product(
+            naam="T-Shirt basic",
+            categorie="Woman",
+            subcategorie="Shirts",
+            maat="M",
+            kleur="Blue",
+            prijs="19.95",
+            voorraad="11",
+            imagePath="assets/images/woman_t-shirt_basic.png",
             body="Dit is een blauwe basic t-shirt voor dames",
+            manufacturer="company name",
+            model="Tx17",
+        )
+    )
+    app.session.add(
+        Product(
+            naam="T-Shirt basic",
+            categorie="Woman",
+            subcategorie="Shirts",
+            maat="S",
+            kleur="Red",
+            prijs="15.95",
+            voorraad="4",
+            imagePath="assets/images/woman_t-shirt_basic.png",
+            body="Dit is een rode basic t-shirt voor dames",
             manufacturer="company name",
             model="Tx17",
         )
@@ -117,6 +163,36 @@ def product_data(app):
             voorraad="2",
             imagePath="assets/images/woman_sweater_basic.png",
             body="Dit is een witte basic sweater voor dames",
+            manufacturer="company name",
+            model="Tx17",
+        )
+    )
+    app.session.add(
+        Product(
+            naam="Sweater basic",
+            categorie="Woman",
+            subcategorie="Sweaters",
+            maat="M",
+            kleur="Yellow",
+            prijs="22.95",
+            voorraad="5",
+            imagePath="assets/images/woman_sweater_basic.png",
+            body="Dit is een gele basic sweater voor dames",
+            manufacturer="company name",
+            model="Tx17",
+        )
+    )
+    app.session.add(
+        Product(
+            naam="Sweater basic",
+            categorie="Woman",
+            subcategorie="Sweaters",
+            maat="S",
+            kleur="Green",
+            prijs="22.95",
+            voorraad="3",
+            imagePath="assets/images/woman_sweater_basic.png",
+            body="Dit is een groene basic sweater voor dames",
             manufacturer="company name",
             model="Tx17",
         )
@@ -216,6 +292,21 @@ def product_data(app):
             naam="basic dress",
             categorie="Woman",
             subcategorie="Dresses",
+            maat="L",
+            kleur="Red",
+            prijs="27.95",
+            voorraad="5",
+            imagePath="assets/images/woman_dress_basic.png",
+            body="Dit is een rode basic dress maat L voor vrouwen",
+            manufacturer="company name",
+            model="Tx17",
+        )
+    )
+    app.session.add(
+        Product(
+            naam="basic dress",
+            categorie="Woman",
+            subcategorie="Dresses",
             maat="M",
             kleur="Green",
             prijs="24.95",
@@ -277,6 +368,11 @@ def maat_data(app):
     )
     app.session.add(
         Maat(
+            maat="XS",
+        )
+    )
+    app.session.add(
+        Maat(
             maat="M",
         )
     )
@@ -323,6 +419,11 @@ def kleur_data(app):
     app.session.add(
         Kleur(
             kleur="Yellow",
+        )
+    )
+    app.session.add(
+        Kleur(
+            kleur="Black",
         )
     )
     app.session.flush()
